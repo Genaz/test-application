@@ -1,0 +1,23 @@
+<form [formGroup]="userForm" *ngIf="user">
+  <div>
+    <label for="name">Name</label>
+    <input formControlName="name" type="text" id="name">
+  </div>
+
+  <div>
+    <label for="email">E-mail</label>
+    <input formControlName="email" type="email" id="email">
+  </div>
+
+  <div>
+      <label for="city">City</label>
+      <input formControlName="city" type="text" id="city">
+      <div *ngIf="city.pending">Checking if City unique...</div>
+      <div *ngIf="city.touched && city.invalid">
+          <div *ngIf="city.errors.required">City is required.</div>
+          <div *ngIf="city.errors.shouldBeUnique">City is already used.</div>
+      </div>
+  </div>
+
+  <button [disabled]="!userForm.valid">Save</button>
+</form>
